@@ -1,0 +1,445 @@
+/* src/components/Dashboard/SmartFormDashboard.css */
+
+.smart-docs-dashboard {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh; /* Forces the container to take full viewport height */
+  padding: 12px;
+  font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+  color: #e0e4f0;
+  box-sizing: border-box;
+}
+
+/* Scrollbar */
+.smart-docs-dashboard::-webkit-scrollbar { width: 6px; }
+.smart-docs-dashboard::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.2); border-radius: 4px; }
+
+/* Headers */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+.dashboard-header h2 { font-size: 1rem; margin: 0; color: #fff; }
+.dashboard-header p { font-size: 0.7rem; margin: 2px 0 0 0; color: #8899bb; }
+
+.kpi-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  grid-template-rows: none !important;
+  grid-auto-flow: unset !important;
+  gap: 8px !important;
+  margin-bottom: 8px;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.kpi-card {
+  background: rgba(15, 18, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 0 !important; /* Critical for preventing grid items from pushing into row 2 */
+  width: 100% !important;
+  box-sizing: border-box;
+}
+.kpi-card:hover { border-color: rgba(255, 255, 255, 0.3); }
+.kpi-card.total:hover { border-color: rgba(0, 255, 136, 0.4); }
+.kpi-content { display: flex; flex-direction: column; margin-left: 8px; min-width: 0; }
+.kpi-label { font-size: 0.6rem; color: #8899bb; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi-value { font-size: 1.4rem; font-weight: bold; line-height: 1; margin: 2px 0; }
+
+/* Layout Grid */
+.main-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(500px, 1.6fr);
+  gap: 8px;
+  align-items: start;
+}
+
+/* Cards */
+.chart-card {
+  background: rgba(15, 18, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: visible; /* Required for tooltips to escape */
+  margin: 5px;
+}
+.chart-card-header {
+  padding: 8px;
+  background: #0f1223;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+.chart-card-title {
+  font-size: 0.85rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #e0e4f0;
+}
+
+/* Ticker */
+.news-ticker-container {
+  background: rgba(255, 107, 107, 0.05);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+@keyframes scrollNews {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.news-ticker-text {
+  display: inline-block;
+  animation: scrollNews 25s linear infinite;
+  font-size: 0.75rem;
+  color: #ff6b6b;
+  font-weight: 500;
+}
+
+/* --- Combo Chart (Issues & Response) --- */
+.combo-chart-wrapper {
+  padding: 16px 8px 8px 8px;
+  position: relative;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.combo-y-axis-left, .combo-y-axis-right {
+  position: absolute;
+  top: 16px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: #8899bb;
+  width: 20px;
+  z-index: 5;
+}
+.combo-y-axis-left { left: 0; text-align: right; }
+.combo-y-axis-right { right: 0; text-align: left; }
+
+.combo-chart-area {
+  flex: 1;
+  margin-left: 24px;
+  margin-right: 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  z-index: 1;
+}
+
+.combo-bars-container {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 2px;
+  z-index: 5;
+}
+
+.combo-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 12%;
+  cursor: pointer;
+}
+
+.combo-unified-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 5px);
+  background: #0f1223;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #e0e4f0;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.combo-column:hover .combo-unified-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -10px);
+}
+.combo-unified-tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px;
+  border-width: 6px; border-style: solid; border-color: rgba(255,255,255,0.2) transparent transparent transparent;
+}
+.combo-unified-tooltip::before {
+  content: ''; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+  border-width: 5px; border-style: solid; border-color: #0f1223 transparent transparent transparent; z-index: 1;
+}
+.tt-title {
+  font-weight: bold; font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 4px;
+}
+.tt-row { display: flex; justify-content: space-between; gap: 16px; font-size: 0.7rem; }
+.tt-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+
+/* SVG Line & Badges */
+.combo-svg-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: visible;
+  z-index: 10; 
+  pointer-events: none;
+}
+.combo-value-badges {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 20; 
+}
+
+/* --- Certificates Chart --- */
+.cert-bar-group { transition: opacity 0.2s; position: relative; }
+.cert-bar-group:hover { opacity: 0.85; }
+
+.cert-tooltip {
+  position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-8px);
+  background: #0f1223; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+  padding: 8px 10px; color: #e0e4f0; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  opacity: 0; visibility: hidden; transition: all 0.2s ease; z-index: 9999; pointer-events: none;
+}
+.cert-tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+  border-width: 5px; border-style: solid; border-color: rgba(255,255,255,0.15) transparent transparent transparent;
+}
+.cert-tooltip::before {
+  content: ''; position: absolute; top: 100%; left: 50%; margin-left: -4px;
+  border-width: 4px; border-style: solid; border-color: #0f1223 transparent transparent transparent; z-index: 1;
+}
+.cert-bar-group:hover .cert-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-4px); }
+
+/* Allow container auto-scrolling if screen height is small */
+.smart-docs-dashboard {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Equal top row KPI cards */
+.kpi-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.site-model-card {
+  height: 600px !important; /* Increase from 380px to desired view height */
+  display: flex;
+  flex-direction: column;
+}
+
+.iframe-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px; /* Forces min height for the Matterport viewport */
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;/* src/components/Dashboard/SmartFormDashboard.css */
+
+  .smart-docs-dashboard {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh; /* Forces the container to take full viewport height */
+    padding: 12px;
+    font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+    color: #e0e4f0;
+    box-sizing: border-box;
+  }
+  
+  /* Scrollbar */
+  .smart-docs-dashboard::-webkit-scrollbar { width: 6px; }
+  .smart-docs-dashboard::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.2); border-radius: 4px; }
+  
+  /* Headers */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+  }
+  .dashboard-header h2 { font-size: 1rem; margin: 0; color: #fff; }
+  .dashboard-header p { font-size: 0.7rem; margin: 2px 0 0 0; color: #8899bb; }
+  
+  /* KPI Grid - Strictly 1 row across 5 equal columns */
+  .kpi-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: unset !important;
+    gap: 8px !important;
+    margin-bottom: 8px;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .kpi-card {
+    background: rgba(15, 18, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 0 !important; /* Prevents text overflow from forcing row 2 */
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .kpi-card:hover { border-color: rgba(255, 255, 255, 0.3); }
+  .kpi-card.total:hover { border-color: rgba(0, 255, 136, 0.4); }
+  .kpi-content { display: flex; flex-direction: column; margin-left: 8px; min-width: 0; }
+  .kpi-label { font-size: 0.8rem; color: #8899bb; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kpi-value { font-size: 1.4rem; font-weight: bold; line-height: 1; margin: 2px 0; }
+  
+  /* Main Layout Grid - Equal column height stretching */
+  .main-layout-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(500px, 1.6fr);
+    gap: 8px;
+    align-items: stretch; /* Forces left and right columns to be the exact same height */
+  }
+  
+  /* Column Containers */
+  .dashboard-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+  }
+  
+  /* Cards */
+  .chart-card {
+    background: rgba(15, 18, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible; /* Required for tooltips to escape */
+  }
+  .chart-card-header {
+    padding: 8px;
+    background: #0f1223;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+  }
+  .chart-card-title {
+    font-size: 0.85rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #e0e4f0;
+  }
+  
+  /* Site Model Container - Dynamically expands to equalize column heights */
+  .site-model-card {
+    flex: 1 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+  }
+  
+  .site-model-card .iframe-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .site-model-card iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* News Ticker */
+  .news-ticker-container {
+    background: rgba(255, 107, 107, 0.05);
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+  }
+  @keyframes scrollNews {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .news-ticker-text {
+    display: inline-block;
+    animation: scrollNews 25s linear infinite;
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    font-weight: 500;
+  }
+  
+  /* Custom Tooltips for Recharts */
+  .recharts-default-tooltip {
+    background-color: #0f1223 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+  }
+  
+  .recharts-tooltip-cursor {
+    fill: rgba(255, 255, 255, 0.03);
+  }
+  
+  .recharts-pie-sector:focus {
+    outline: none;
+  }
+  height: 100%;
+  border: none;
+}
+
+.iframe-container {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}

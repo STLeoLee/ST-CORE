@@ -1,0 +1,5 @@
+/node_modules
+/debug
+/__pycache__
+/stcore_app/backup_component_obsolate
+*.pyc

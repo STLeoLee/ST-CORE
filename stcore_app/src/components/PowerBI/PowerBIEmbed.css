@@ -1,0 +1,115 @@
+.powerbi-embed-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #0a0a1e;
+}
+
+.powerbi-container {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  transition: opacity 0.3s ease;
+}
+
+.powerbi-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  min-height: 500px !important;
+}
+
+/* Loading overlay within the embed */
+.powerbi-embed-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.powerbi-embed-loading .loading-overlay {
+  background: rgba(10, 10, 30, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+/* Error state */
+.powerbi-embed-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #c8d0e0;
+  z-index: 20;
+  max-width: 500px;
+  padding: 40px;
+  background: rgba(10, 10, 30, 0.95);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.powerbi-embed-error .error-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.powerbi-embed-error h3 {
+  color: #ff6b6b;
+  margin: 0 0 8px 0;
+  font-weight: 400;
+}
+
+.powerbi-embed-error p {
+  color: #8899bb;
+  margin: 0 0 20px 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.powerbi-embed-error .retry-btn {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.powerbi-embed-error .retry-btn:hover {
+  background: rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.05);
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .powerbi-embed-error {
+    padding: 24px;
+    margin: 20px;
+    max-width: 90%;
+  }
+  
+  .powerbi-embed-error h3 {
+    font-size: 1.1rem;
+  }
+  
+  .powerbi-embed-error p {
+    font-size: 0.8rem;
+  }
+  
+  .powerbi-container {
+    min-height: 400px;
+  }
+  
+  .powerbi-container iframe {
+    min-height: 400px !important;
+  }
+}

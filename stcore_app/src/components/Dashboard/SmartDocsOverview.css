@@ -1,0 +1,316 @@
+/* src/components/Dashboard/SmartDocsOverview.css */
+.smart-docs-overview {
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #0a0a1e;
+    color: #e0e4f0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* --- Header & Global Controls --- */
+  .sdo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+  }
+  .sdo-header h1 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+  }
+  .sdo-header p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #8899bb;
+  }
+  .sdo-global-controls {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .filter-presets {
+    display: flex;
+    gap: 8px;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #8899bb;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border-color: rgba(0, 255, 136, 0.3);
+  }
+  .export-controls {
+    display: flex;
+    gap: 8px;
+  }
+  .export-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e4f0;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  /* --- KPI Summary Deck --- */
+  .sdo-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .sdo-kpi-card {
+    background: rgba(15, 18, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .kpi-title {
+    font-size: 0.7rem;
+    color: #8899bb;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .kpi-subtext {
+    font-size: 0.75rem;
+    color: #556688;
+  }
+  .kpi-subtext.critical { color: #ff6b6b; font-weight: 600; }
+  .kpi-subtext.warning { color: #ffd93d; }
+  .progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #00ff88;
+    border-radius: 3px;
+  }
+  
+  /* --- Analytical Charts --- */
+  .sdo-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .sdo-chart-card {
+    background: rgba(15, 18, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .sdo-chart-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 0.85rem;
+    color: #a0b0c8;
+    text-transform: uppercase;
+  }
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  .chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 0.75rem;
+    color: #8899bb;
+    margin-top: 8px;
+  }
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .dot.blue { background: #6bcbff; }
+  .dot.green { background: #00ff88; }
+  
+  /* --- Bottleneck List --- */
+  .bottleneck-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .bottleneck-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bottleneck-label {
+    width: 100px;
+    font-size: 0.8rem;
+    color: #e0e4f0;
+  }
+  .bottleneck-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bottleneck-bar-fill {
+    height: 100%;
+    background: #6bcbff;
+    border-radius: 4px;
+  }
+  .bottleneck-bar-fill.risk { background: #ff6b6b; }
+  .bottleneck-count {
+    width: 80px;
+    text-align: right;
+    font-size: 0.75rem;
+    color: #8899bb;
+  }
+  
+  /* --- Management Data Table --- */
+  .sdo-table-card {
+    background: rgba(15, 18, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .sdo-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .sdo-table-header h3 {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #a0b0c8;
+  }
+  .table-search {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .table-search input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    font-size: 0.8rem;
+    width: 200px;
+  }
+  .table-search svg { color: #8899bb; }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  .sdo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .sdo-table th {
+    text-align: left;
+    padding: 10px 12px;
+    color: #8899bb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+  .sdo-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: #e0e4f0;
+  }
+  .sdo-table tr:hover td {
+    background: rgba(0, 255, 136, 0.02);
+  }
+  .text-mono { font-family: monospace; color: #8899bb; }
+  .text-name { font-weight: 500; }
+  
+  .badge-priority {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .badge-priority.high { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+  .badge-priority.med { background: rgba(255, 217, 61, 0.15); color: #ffd93d; }
+  .badge-priority.low { background: rgba(107, 203, 255, 0.15); color: #6bcbff; }
+  
+  .status-text { font-weight: 600; font-size: 0.75rem; }
+  .status-text.overdue { color: #ff6b6b; }
+  .status-text.pending { color: #ffd93d; }
+  .aging-text {
+    display: block;
+    font-size: 0.65rem;
+    color: #ff6b6b;
+    margin-top: 2px;
+  }
+  
+  .mini-progress {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .mini-progress-fill { height: 100%; background: #00ff88; border-radius: 2px; }
+  .comp-text { font-size: 0.75rem; color: #8899bb; }
+  
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+  .action-btn.remind { background: rgba(255, 107, 107, 0.1); color: #ff6b6b; }
+  .action-btn.remind:hover { background: rgba(255, 107, 107, 0.2); }
+  .action-btn.view { background: rgba(107, 203, 255, 0.1); color: #6bcbff; }
+  .action-btn.view:hover { background: rgba(107, 203, 255, 0.2); }
+  
+  .sdo-table-footer {
+    margin-top: 12px;
+    text-align: right;
+    font-size: 0.75rem;
+    color: #8899bb;
+  }
